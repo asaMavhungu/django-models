@@ -23,8 +23,8 @@ def flight(request, flight_id):
 def book(request, flight_id):
     if request.method == "POST":
         flight = Flight.objects.get(pk=flight_id)
-        passenger_id = int(request.post["passenger"])
+        passenger_id = int(request.POST["passenger"])
         passenger = Passenger.objects.get(pk=passenger_id)
-        passenger.flights.add(passenger)
-        return HttpResponseRedirect(reverse("flights", args=(flight_id)))
+        passenger.flights.add(flight)
+        return HttpResponseRedirect(reverse("flight", args=(flight.id,)))
     pass
